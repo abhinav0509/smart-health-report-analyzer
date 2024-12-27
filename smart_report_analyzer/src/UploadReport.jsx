@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./App.css"; // Separate CSS for styling
 
 const UploadReport = () => {
   const [file, setFile] = useState(null);
-  const [analysis, setAnalysis] = useState([]);
+  const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -34,8 +35,8 @@ const UploadReport = () => {
       });
 
       if (response.data?.data) {
-        const structuredData = parseAnalysis(response.data.data); // Parse response
-        setAnalysis(structuredData);
+        // Directly set the structured response without parsing
+        setAnalysis(response.data.data);
       } else {
         setError("Invalid response from the server.");
       }
@@ -53,44 +54,41 @@ const UploadReport = () => {
     }
   };
 
-  // Helper function to parse analysis data (assuming backend sends structured data)
-  const parseAnalysis = (data) => {
-    try {
-      const rows = data.split("\n").filter((line) => line.trim() !== ""); // Handle text response
-      return rows.map((row) => {
-        const [test, value, healthyRange, status, precautions] = row.split(",");
-        return { test, value, healthyRange, status, precautions };
-      });
-    } catch (error) {
-      console.error("Error parsing analysis:", error);
-      setError("Error processing the server response.");
-      return [];
-    }
-  };
-
   return (
-    <div style={styles.container}>
-      <h1>Upload Health Lab Test Report</h1>
+    <div className="container">
+      <h1>Upload Your Lab Test Report</h1>
 
       {/* File Input */}
       <input
         type="file"
         accept="application/pdf"
         onChange={handleFileChange}
-        style={styles.fileInput}
+        className="file-input"
       />
-      <button onClick={handleFileUpload} disabled={loading} style={styles.uploadButton}>
+      <button onClick={handleFileUpload} disabled={loading} className="upload-button">
         {loading ? "Uploading..." : "Upload Report"}
       </button>
 
       {/* Error Message */}
-      {error && <p style={styles.error}>{error}</p>}
+      {error && <p className="error">{error}</p>}
 
       {/* Analysis Result */}
-      {analysis.length > 0 && (
-        <div style={styles.resultContainer}>
-          <h2>Analysis Result</h2>
-          <table style={styles.table}>
+      {analysis && (
+        <div className="analysis-result">
+          <h2>Patient Information</h2>
+          <div className="patient-info">
+            <p><strong>Name:</strong> {analysis.patientDetails.name}</p>
+            <p><strong>Age:</strong> {analysis.patientDetails.age}</p>
+            <p><strong>Gender:</strong> {analysis.patientDetails.gender}</p>
+          </div>
+
+          <h2>Doctor/Lab Information</h2>
+          <div className="doctor-info">
+            <p><strong>Doctor/Lab Name:</strong> Dr. {analysis.doctorInfo.name}</p>
+          </div>
+
+          <h2>Test Results</h2>
+          <table className="test-results">
             <thead>
               <tr>
                 <th>Test</th>
@@ -101,15 +99,13 @@ const UploadReport = () => {
               </tr>
             </thead>
             <tbody>
-              {analysis.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.test}</td>
-                  <td>{item.value}</td>
-                  <td>{item.healthyRange}</td>
-                  <td style={item.status === "Unhealthy" ? styles.unhealthy : styles.healthy}>
-                    {item.status}
-                  </td>
-                  <td>{item.precautions}</td>
+              {analysis.tests.map((test, index) => (
+                <tr key={index} className={test.status === "Unhealthy" ? "unhealthy" : "healthy"}>
+                  <td>{test.test}</td>
+                  <td>{test.value}</td>
+                  <td>{test.healthyRange}</td>
+                  <td>{test.status}</td>
+                  <td>{test.precautions || "None"}</td>
                 </tr>
               ))}
             </tbody>
@@ -120,54 +116,5 @@ const UploadReport = () => {
   );
 };
 
-// Styling (using inline styles for simplicity)
-const styles = {
-  container: {
-    width: "80%",
-    margin: "0 auto",
-    textAlign: "center",
-    fontFamily: "'Arial', sans-serif",
-  },
-  fileInput: {
-    margin: "20px 0",
-  },
-  uploadButton: {
-    padding: "10px 20px",
-    fontSize: "16px",
-    cursor: "pointer",
-    backgroundColor: "#4CAF50",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    margin: "10px",
-    transition: "background-color 0.3s",
-  },
-  error: {
-    color: "red",
-    marginTop: "10px",
-  },
-  resultContainer: {
-    marginTop: "20px",
-    textAlign: "left",
-  },
-  table: {
-    width: "100%",
-    borderCollapse: "collapse",
-    marginTop: "20px",
-  },
-  healthy: {
-    color: "green",
-  },
-  unhealthy: {
-    color: "red",
-  },
-  tableHeader: {
-    backgroundColor: "#f2f2f2",
-  },
-  tableCell: {
-    border: "1px solid #ddd",
-    padding: "8px",
-  },
-};
-
 export default UploadReport;
+

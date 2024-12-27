@@ -1,42 +1,105 @@
-#root {
-  max-width: 1280px;
+/* General Styles */
+.container {
+  width: 90%;
   margin: 0 auto;
-  padding: 2rem;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+#main-title{
+  text-align: center;
+  margin: auto;
+}
+.file-input {
+  margin: 20px 0;
+}
+
+.upload-button {
+  padding: 12px 30px;
+  font-size: 18px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.upload-button:disabled {
+  background-color: #aaa;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.analysis-result {
+  margin-top: 40px;
+  text-align: left;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.patient-card, .doctor-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 10px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+table th {
+  background-color: #f2f2f2;
+  color: #333;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.healthy {
+  background-color: #d4edda;
+}
+
+.unhealthy {
+  background-color: #f8d7da;
+}
+
+.unhealthy td {
+  color: red;
+}
+
+td, th {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
   }
-  to {
-    transform: rotate(360deg);
+  table {
+    font-size: 12px;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
