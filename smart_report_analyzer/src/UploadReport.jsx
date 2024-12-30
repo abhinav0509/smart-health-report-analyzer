@@ -103,7 +103,7 @@ const UploadReport = () => {
                 <tr key={index} className={test.status === "Unhealthy" ? "unhealthy" : "healthy"}>
                   <td>{test.test}</td>
                   <td>{test.value}</td>
-                  <td>{test.healthyRange}</td>
+                  <td>{test.referenceRange}</td>
                   <td>{test.status}</td>
                   <td>{test.precautions || "None"}</td>
                 </tr>
