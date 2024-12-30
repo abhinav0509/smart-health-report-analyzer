@@ -1,105 +1,111 @@
-/* General Styles */
 .container {
-  width: 90%;
-  margin: 0 auto;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
   text-align: center;
-  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.upload-section {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
-}
-#main-title{
-  text-align: center;
-  margin: auto;
-}
 .file-input {
-  margin: 20px 0;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .upload-button {
-  padding: 12px 30px;
-  font-size: 18px;
-  background-color: #4CAF50;
+  padding: 10px 20px;
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
-  margin: 10px;
+  border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
 }
 
 .upload-button:disabled {
-  background-color: #aaa;
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-.error {
+.error-message {
   color: red;
-  margin-top: 10px;
-}
-
-.analysis-result {
-  margin-top: 40px;
-  text-align: left;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.patient-card, .doctor-card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  color: #333;
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-table th, table td {
-  border: 1px solid #ddd;
-  padding: 10px;
+  font-weight: bold;
   text-align: center;
 }
 
-table th {
-  background-color: #f2f2f2;
-  color: #333;
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.healthy {
-  background-color: #d4edda;
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007bff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
 }
 
-.unhealthy {
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.analysis-result {
+  margin-top: 20px;
+}
+
+.patient-info, .doctor-info, .test-results {
+  margin-bottom: 20px;
+}
+
+.patient-info p, .doctor-info p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.test-results table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.test-results th, .test-results td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.unhealthy-row {
   background-color: #f8d7da;
+  color: #721c24;
 }
 
-.unhealthy td {
-  color: red;
-}
-
-td, th {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-@media (max-width: 768px) {
-  .container {
-    width: 100%;
-  }
-  table {
-    font-size: 12px;
-  }
+.healthy-row {
+  background-color: #d4edda;
+  color: #155724;
 }
