@@ -32,7 +32,7 @@ const UploadReport = () => {
 
       if (response.data && response.data.data) {
         setAnalysis(response.data.data); // Set the parsed data from the backend
-        console.log("Client Side"+ analysis);
+        console.log("On Frontend"+analysis);
       } else {
         setError("No data returned from the backend.");
       }
@@ -46,7 +46,7 @@ const UploadReport = () => {
 
   return (
     <div className="container">
-      <h1>Smart Health Report Analysis</h1>
+      <h1 className="main-title">Smart Health Report Analysis</h1>
       <div className="upload-section">
         <input type="file" accept="application/pdf" onChange={handleFileChange} className="file-input" />
         <button onClick={handleFileUpload} disabled={loading} className="upload-button">
@@ -56,7 +56,7 @@ const UploadReport = () => {
       {loading && (
         <div className="loader-container">
           <div className="loader"></div>
-          <p>Processing your report, please wait...</p>
+          <p> Processing your report, please wait...</p>
         </div>
       )}
       {error && <p className="error-message">{error}</p>}
@@ -68,7 +68,7 @@ const UploadReport = () => {
               <>
                 <p><strong>Name:</strong> {analysis.PatientDetails.Name}</p>
                 <p><strong>Age:</strong> {analysis.PatientDetails.Age}</p>
-                <p><strong>Gender:</strong> {analysis.Patient_Details.Gender}</p>
+                <p><strong>Gender:</strong> {analysis.PatientDetails.Gender}</p>
                 <p><strong>Report Date:</strong> {analysis.PatientDetails.Date}</p>
               </>
             ) : (
