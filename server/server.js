@@ -1,3 +1,4 @@
+
 // Import necessary modules
 const express = require("express");
 const multer = require("multer");
@@ -88,7 +89,7 @@ app.post("/upload-report", upload, async (req, res) => {
     const pdfText = await extractPdfData(filePath);
     const processedData = await processHealthReport(pdfText);
 
-    // Return data to frontend
+    // Ensure the response format matches the frontend expectation
     res.json({ data: processedData });
   } catch (error) {
     console.error("Processing Error:", error.message);
@@ -100,6 +101,7 @@ app.post("/upload-report", upload, async (req, res) => {
     });
   }
 });
+
 
 // Start the server
 app.listen(port, () => {
